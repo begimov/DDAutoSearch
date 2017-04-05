@@ -12089,10 +12089,7 @@ module.exports = function spread(callback) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_autocomplete_js__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_autocomplete_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_autocomplete_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_algoliasearch__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_algoliasearch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_algoliasearch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_autocomplete__ = __webpack_require__(107);
 //
 //
 //
@@ -12110,25 +12107,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        var index = __WEBPACK_IMPORTED_MODULE_1_algoliasearch___default()('O8MEW55J9E', '343230ff7c66bd77e98c352ffec8ee8a').initIndex('users');
-        __WEBPACK_IMPORTED_MODULE_0_autocomplete_js___default()('#users', {}, {
-            source: __WEBPACK_IMPORTED_MODULE_0_autocomplete_js___default.a.sources.hits(index, {
-                hitsPerPage: 5
-            }),
-            displayKey: 'name',
-            templates: {
-                suggestion: function suggestion(_suggestion) {
-                    return '<span>' + _suggestion.name + '</span>';
-                },
-
-                empty: '<div class="aa-empty">No users found</div>'
-            }
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_autocomplete__["a" /* userautocomplete */])('#users', {
+            hitsPerPage: 4,
+            displayKey: 'name'
         });
     },
 
@@ -51029,6 +51014,40 @@ var objectKeys = Object.keys || function (obj) {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 107 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_autocomplete_js__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_autocomplete_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_autocomplete_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_algoliasearch__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_algoliasearch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_algoliasearch__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return userautocomplete; });
+
+
+
+var index = __WEBPACK_IMPORTED_MODULE_1_algoliasearch___default()('O8MEW55J9E', '343230ff7c66bd77e98c352ffec8ee8a');
+
+var userautocomplete = function userautocomplete(selector, _ref) {
+    var hitsPerPage = _ref.hitsPerPage,
+        displayKey = _ref.displayKey;
+
+    index = index.initIndex('users');
+
+    return __WEBPACK_IMPORTED_MODULE_0_autocomplete_js___default()(selector, {}, {
+        source: __WEBPACK_IMPORTED_MODULE_0_autocomplete_js___default.a.sources.hits(index, { hitsPerPage: hitsPerPage }),
+        displayKey: displayKey,
+        templates: {
+            suggestion: function suggestion(_suggestion) {
+                return '<span>' + _suggestion._highlightResult.name.value + '</span>';
+            },
+
+            empty: '<div class="aa-empty">No users found</div>'
+        }
+    });
+};
 
 /***/ })
 /******/ ]);
